@@ -1,0 +1,16 @@
+.create-class {
+    .ant-form-item-control-input-content {
+        text-align: left;
+    }
+}
+.compact-space-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.qr-modal {
+    .ant-modal-footer {
+        display: none;
+    }
+}

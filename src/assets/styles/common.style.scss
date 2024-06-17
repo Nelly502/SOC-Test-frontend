@@ -1,0 +1,14 @@
+.ant-form-item-explain-error {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.form-shadow{
+    -moz-box-shadow: 0 0 5px #999;
+    -webkit-box-shadow: 0 0 5px #999;
+    box-shadow: 0 0 8px 1px rgb(0 0 0 / 0.1);
+}
+.shadow-bottom {
+  filter: drop-shadow(0 10px 9px rgba(0, 0, 0, 0.2));
+}

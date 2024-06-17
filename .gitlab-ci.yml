@@ -1,0 +1,58 @@
+stages:
+  - build
+  - test
+  - deploy
+
+Build:
+  stage: build
+  rules:
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+  before_script:
+    - cp ${ENV_FILE} .env
+  script:
+    - docker build --target build -t canhtd/attendance-fe-build .
+  after_script:
+    - docker image rm canhtd/attendance-fe-build
+
+Unit test:
+  stage: test
+  rules:
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+  before_script:
+    - cp ${ENV_FILE} .env
+  script:
+    - echo "Running unit tests..."
+
+Lint test:
+  stage: test
+  rules:
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+  before_script:
+    - cp ${ENV_FILE} .env
+  script:
+    - docker build --target lint -t canhtd/attendance-fe-lint .
+  after_script:
+    - docker image rm canhtd/attendance-fe-lint
+
+Deploy:
+  stage: deploy
+  environment: production
+  only:
+    - main
+  before_script:
+    - cp ${ENV_FILE} .env
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - echo "${SSH_PRIVATE_KEY}"  | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan ${SERVER_IP} >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - docker build --target build -t canhtd/attendance-fe-build .
+    - container_id=$(docker run -d --name canhtd-attendance-fe canhtd/attendance-fe-build)
+    - docker cp -a $container_id:/app/build/. ./build
+    - rsync -av --delete ./build/ ${USERNAME}@${SERVER_IP}:${APP_DIR}
+  after_script:
+    - docker container rm canhtd-attendance-fe
+    - docker image rm canhtd/attendance-fe-build

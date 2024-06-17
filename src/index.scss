@@ -1,0 +1,27 @@
+@tailwind base;
+
+// custom ant btn
+.ant-btn {
+    @apply rounded-full text-xl;
+}
+
+.ant-btn-primary {
+    @apply bg-customBlue;
+
+    &:not(:disabled):hover {
+        @apply bg-customBlue opacity-80;
+    }
+}
+
+.ant-btn-default {
+    @apply bg-slate-200;
+    @apply text-customBlue;
+    &:not(:disabled):hover {
+        @apply bg-slate-200 opacity-80 border-slate-200 text-customBlue;
+    }
+}
+
+//custom a
+a:hover {
+    @apply text-[#2D9596];
+}
