@@ -2,7 +2,7 @@
 
 // custom ant btn
 .ant-btn {
-    @apply rounded-full text-xl;
+    @apply  text-xl;
 }
 
 .ant-btn-primary {
@@ -23,5 +23,5 @@
 
 //custom a
 a:hover {
-    @apply text-[#2D9596];
+    @apply text-customTeal;
 }
