@@ -42,7 +42,7 @@ export function DoQuiz() {
     if (!quiz) {
         return (
             <div className="flex-1 flex flex-col space-y-4 justify-center items-center">
-                <p>Quiz đã đóng</p>
+                <p></p>
                 <Button onClick={handleBack} type="primary">
                     Quay lại
                 </Button>

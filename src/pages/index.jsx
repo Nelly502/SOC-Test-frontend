@@ -25,6 +25,7 @@ import { DoQuiz } from './student/quiz/DoQuiz.jsx';
 import { CreateQuiz } from './teacher/class/class-details/quizzes/CreateQuizz.jsx';
 import { JoinClass } from './student/class/JoinClass.jsx';
 import { stringify } from 'qs';
+import { ListMembers } from './admin/ListMembers.jsx';
 
 const ProtectedRoute = ({ role, redirectPath, children }) => {
     const user = useSelector((state) => state.user);
@@ -52,6 +53,8 @@ const HomeNavigate = () => {
 
     if (user?.role === 1) return <Navigate to="/teacher/classes" />;
     if (user?.role === 2) return <Navigate to="/student/classes" />;
+    if (user?.role === 3) return <Navigate to="/admin/members" />;
+
     return <Navigate to="/auth/login" />;
 };
 
@@ -147,6 +150,19 @@ export const AppRoutes = () => {
                 <Route path="/student/classes/:id" element={<ClassDetailStudent />} />
                 <Route path="/student/classes/:id/:tab" element={<ClassDetailStudent />} />
                 <Route path="/student/quizzes/:id" element={<DoQuiz />} />
+            </Route>
+
+            {/* Admins routes */}
+            <Route
+                element={
+                    <ProtectedRoute role={3} redirectPath="/auth/login">
+                        <AppLayout>
+                            <Outlet />
+                        </AppLayout>
+                    </ProtectedRoute>
+                }
+            >
+                <Route path="admin/members" element={<ListMembers />} />
             </Route>
         </Routes>
     );

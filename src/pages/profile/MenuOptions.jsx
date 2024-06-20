@@ -27,11 +27,11 @@ function MenuOptions({ option, setOption }) {
                         else navigate('/student/classes');
                     }}
                 />
-                <img
+                {/* <img
                     src="https://ik.imagekit.io/bgcofslc/wp-content/uploads/2022/09/AAtten_Logo.png"
                     className="relative w-full h-25 sm:object-cover object-contain shadow-bottom"
                     style={{ zIndex: -1 }}
-                ></img>
+                ></img> */}
             </div>
             <div className="text-center ">
                 <img

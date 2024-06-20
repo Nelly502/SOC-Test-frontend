@@ -75,10 +75,6 @@ export function ClassDetail() {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <h3 className="md:text-4xl text-blue-900 ">{classInfo.name}</h3>
-                <a onClick={showQrCode} className="whitespace-nowrap">
-                    Mã QR tham gia
-                    <BsQrCode className="ml-2" />
-                </a>
             </div>
             {/* Content */}
             <div className="flex-1 flex px-6 pb-6 mt-2 bg-white rounded form-shadow shadow-md">
@@ -94,7 +90,7 @@ export function ClassDetail() {
             <Modal
                 className="qr-modal top-[10vh] "
                 open={openQrModal}
-                title="Tham gia lớp bằng mã QR"
+                title="Tham gia lớp bằng "
                 width="fit-content"
                 closable
                 onCancel={closeQrCode}

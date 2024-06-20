@@ -46,6 +46,12 @@ export const LoginPage = () => {
                 <div className="w-1/2 md:block  hidden relative">
                     <img src={loginLogo} className="w-full block object-cover" />
 
+                    <div className="absolute inset-0 flex justify-center items-start">
+                        <div className="text-right mt-24">
+                            <h1 className="text-white text-5xl">Welcome to the SOC Tests &nbsp;</h1>
+                        </div>
+                    </div>
+
                     <div className="absolute inset-0 flex justify-center items-end">
                         <div className="text-right mt-4">
                             <p className="text-white mb-16">
