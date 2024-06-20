@@ -1,16 +1,13 @@
-import { Modal, Tabs } from 'antd';
+import { Tabs } from 'antd';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import { EditQuiz } from './EditQuiz.jsx';
 import { getQuizById } from '../../../requests/teacher/teacher-quizzes.request.js';
 import { StudentsAnswer } from './StudentAnswers.jsx';
-import QRCode from 'react-qr-code';
-import { BsQrCode } from 'react-icons/bs';
 
 export function QuizDetails() {
     const [loading, setLoading] = useState(false);
     const [quiz, setQuiz] = useState({});
-    const [openQrModal, setOpenQrModal] = useState(false);
 
     const navigate = useNavigate();
     const { id, tab } = useParams();
@@ -41,14 +38,6 @@ export function QuizDetails() {
         getData();
     };
 
-    const showQrCode = () => {
-        setOpenQrModal(true);
-    };
-
-    const closeQrCode = () => {
-        setOpenQrModal(false);
-    };
-
     const tabItems = [
         {
             key: 'edit',
@@ -67,10 +56,6 @@ export function QuizDetails() {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <h3 className="md:text-4xl text-blue-900 ">{quiz.name}</h3>
-                <a onClick={showQrCode} className="whitespace-nowrap">
-                    Mã QR làm bài
-                    <BsQrCode className="ml-2" />
-                </a>
             </div>
             {/* Content */}
             <div className="flex-1 flex mt-2 p-2 md:p-5 bg-white rounded form-shadow">
@@ -82,20 +67,6 @@ export function QuizDetails() {
                     onChange={(key) => navigate(`/teacher/quizzes/${id}/${key}`, { replace: true })}
                 />
             </div>
-
-            <Modal
-                className="qr-modal top-[10vh]"
-                open={openQrModal}
-                title="Quét mã QR để làm bài"
-                width="fit-content"
-                closable
-                onCancel={closeQrCode}
-            >
-                <QRCode
-                    className="w-[70vh] max-w-full h-[70vh]"
-                    value={`${import.meta.env.VITE_APP_URL}/student/quizzes/${quiz.id}`}
-                />
-            </Modal>
         </div>
     );
 }

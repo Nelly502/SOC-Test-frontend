@@ -1,6 +1,5 @@
 import { Button, Form, Input, Switch, message } from 'antd';
 import { useEffect, useState } from 'react';
-import { getGeolocationPosition } from '../../../utils/geolocation.util.js';
 import { updateQuiz } from '../../../requests/teacher/teacher-quizzes.request.js';
 import { DateInput } from '../../../components/inputs/DateInput.jsx';
 import { QuestionsInput } from '../../../components/inputs/QuestionsInput.jsx';
@@ -19,9 +18,7 @@ export function EditQuiz({ quiz, onUpdate }) {
             setLoading(true);
 
             const { questionsKeys, ...data } = await form.validateFields();
-            if (data.open) {
-                data.position = await getGeolocationPosition();
-            }
+          
             data.questions = questionsKeys.questions;
             data.keys = questionsKeys.keys;
             delete data.classId;

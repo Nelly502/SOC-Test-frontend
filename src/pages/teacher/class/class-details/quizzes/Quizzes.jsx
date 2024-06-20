@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import { deleteQuizzes, getListQuizzes, updateQuiz } from '../../../../../requests/teacher/teacher-quizzes.request.js';
 import { Link } from 'react-router-dom';
-import { getGeolocationPosition } from '../../../../../utils/geolocation.util.js';
 import { dayjs } from '../../../../../utils/dayjs.util.js';
 
 export function Quizzes() {
@@ -52,10 +51,7 @@ export function Quizzes() {
         try {
             setLoading(true);
             const body = { open };
-            if (open) {
-                const position = await getGeolocationPosition();
-                body.position = position;
-            }
+            
             await updateQuiz(id, body);
             getData();
         } catch (e) {

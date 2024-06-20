@@ -85,7 +85,7 @@ export function ListMembers() {
         {
             title: 'STT',
             dataIndex: 'number',
-            width: '5%',
+            width: '10%',
             key: 'number',
             align: 'center',
             ellipsis: true,
@@ -94,7 +94,7 @@ export function ListMembers() {
         {
             title: 'Email',
             dataIndex: 'email',
-            width: '25%',
+            width: '20%',
             key: 'userEmail',
             ellipsis: true,
         },
@@ -143,10 +143,11 @@ export function ListMembers() {
         return (
             <Table
                 columns={columns}
-                dataSource={data.records ?? []}
+                dataSource={data.records}
                 rowKey={(record) => record.id}
                 bordered={true}
                 loading={loading}
+                footer={() => <p>{`Tổng số: ${data.total}`}</p>}
                 scroll={{ x: true }}
                 pagination={{
                     current: query.skip / query.take + 1,
@@ -164,7 +165,7 @@ export function ListMembers() {
         {
             title: 'STT',
             dataIndex: 'number',
-            width: '5%',
+            width: '10%',
             key: 'number',
             align: 'center',
             ellipsis: true,
@@ -173,7 +174,7 @@ export function ListMembers() {
         {
             title: 'Email',
             dataIndex: 'email',
-            width: '25%',
+            width: '20%',
             key: 'userEmail',
             ellipsis: true,
         },
@@ -221,10 +222,11 @@ export function ListMembers() {
         return (
             <Table
                 columns={columns2}
-                dataSource={data.records?.filter((item) => +item.role === 2)}
+                dataSource={data.records}
                 rowKey={(record) => record.id}
                 bordered={true}
                 loading={loading}
+                footer={() => <p>{`Tổng số: ${data.total}`}</p>}
                 scroll={{ x: true }}
                 pagination={{
                     current: query.skip / query.take + 1,

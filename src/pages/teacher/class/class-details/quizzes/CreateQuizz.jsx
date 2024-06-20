@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router';
 import { useState } from 'react';
 import { DateInput } from '../../../../../components/inputs/DateInput.jsx';
 import { QuestionsInput } from '../../../../../components/inputs/QuestionsInput.jsx';
-import { getGeolocationPosition } from '../../../../../utils/geolocation.util.js';
 import { createQuiz } from '../../../../../requests/teacher/teacher-quizzes.request.js';
 import logo from '../../../../../assets/images/logo.png';
 
@@ -20,9 +19,7 @@ export function CreateQuiz() {
             setLoading(true);
 
             const { questionsKeys, ...data } = await form.validateFields();
-            if (data.open) {
-                data.position = await getGeolocationPosition();
-            }
+
             data.questions = questionsKeys.questions;
             data.keys = questionsKeys.keys;
             data.classId = Number(classId);
