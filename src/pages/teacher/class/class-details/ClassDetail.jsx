@@ -1,18 +1,15 @@
 import { useParams, useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
-import { Modal, Tabs } from 'antd';
+import { Tabs } from 'antd';
 import { Members } from './members/Members';
 import { Quizzes } from './quizzes/Quizzes';
 import { ClassSetting } from './settings/ClassSetting';
 import { getClassByID } from '../../../../requests/teacher/teacher-classes.request';
 import { Loading } from '../../../../components/loading/Loading.jsx';
-import { BsQrCode } from 'react-icons/bs';
-import QRCode from 'react-qr-code';
 
 export function ClassDetail() {
     const [loading, setLoading] = useState(true);
     const [classInfo, setClassInfo] = useState({});
-    const [openQrModal, setOpenQrModal] = useState(false);
 
     const navigate = useNavigate();
     let { id, tab } = useParams();
@@ -37,14 +34,6 @@ export function ClassDetail() {
         };
         fetchData();
     }, []);
-
-    const showQrCode = () => {
-        setOpenQrModal(true);
-    };
-
-    const closeQrCode = () => {
-        setOpenQrModal(false);
-    };
 
     const onChangeClassInfo = (newClassInfo) => {
         setClassInfo(newClassInfo);
@@ -86,20 +75,6 @@ export function ClassDetail() {
                     onChange={(key) => navigate(`/teacher/classes/${id}/${key}`, { replace: true })}
                 />
             </div>
-
-            <Modal
-                className="qr-modal top-[10vh] "
-                open={openQrModal}
-                title="Tham gia lớp bằng "
-                width="fit-content"
-                closable
-                onCancel={closeQrCode}
-            >
-                <QRCode
-                    className="w-[70vh] max-w-full h-[70vh]"
-                    value={`${import.meta.env.VITE_APP_URL}/student/classes/join/${classInfo.classNumber}`}
-                />
-            </Modal>
         </div>
     );
 }

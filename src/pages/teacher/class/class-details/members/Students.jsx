@@ -13,7 +13,7 @@ export function Students({ classId, onShowAdd, update }) {
             setLoading(true);
             const data = await getStudents(query);
             setData(data);
-            console.log(data);
+            // console.log(data);
         } catch (e) {
             //
         } finally {

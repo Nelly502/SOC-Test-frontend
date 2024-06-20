@@ -1,9 +1,9 @@
 @tailwind base;
 
 // custom ant btn
-.ant-btn {
-    @apply  text-xl;
-}
+// .ant-btn {
+//     @apply  text-xl;
+// }
 
 .ant-btn-primary {
     @apply bg-customBlue;
@@ -14,8 +14,8 @@
 }
 
 .ant-btn-default {
-    @apply bg-slate-200;
-    @apply text-customBlue;
+    // @apply bg-slate-200;
+    // @apply text-customBlue;
     &:not(:disabled):hover {
         @apply bg-slate-200 opacity-80 border-slate-200 text-customBlue;
     }

@@ -18,7 +18,7 @@ function ChangePassword({ setOption, getClassName }) {
     const successMessage = () => {
         messageApi.open({
             type: 'success',
-            content: 'Tạo lớp thành công!',
+            content: 'Đổi mật khẩu thành công!',
         });
     };
     const onFinish = async () => {

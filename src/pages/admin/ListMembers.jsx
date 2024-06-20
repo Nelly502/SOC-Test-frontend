@@ -1,4 +1,4 @@
-import { Table, Input, Button, Tabs, Typography } from 'antd';
+import { Table, Input, Button, Tabs, Typography, Modal } from 'antd';
 import { DeleteOutlined } from '@ant-design/icons';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
@@ -68,16 +68,24 @@ export function ListMembers() {
         handleNavigate({ take: pageSize, skip: (page - 1) * pageSize });
     };
 
-    const handleDelete = async (id) => {
-        try {
-            setLoading(true);
-            await deleteMember(id);
-            await getData();
-        } catch (e) {
-            console.error(e);
-        } finally {
-            setLoading(false);
-        }
+    const handleDeleteMember = async (id) => {
+        Modal.confirm({
+            title: `Bạn chắc chắn muốn xóa thành viên này?`,
+            cancelText: 'Hủy bỏ',
+            okText: 'Xác nhận',
+            okType: 'danger',
+            onOk: async () => {
+                try {
+                    setLoading(true);
+                    await deleteMember(id);
+                    await getData();
+                } catch (e) {
+                    //
+                } finally {
+                    setLoading(false);
+                }
+            },
+        });
     };
 
     //for table teacher
@@ -100,7 +108,7 @@ export function ListMembers() {
         },
         {
             title: 'Family Name',
-            dataIndex: 'familyName',
+            dataIndex: 'user',
             width: '15%',
             key: 'familyName',
             className: 'nowrap',
@@ -134,7 +142,9 @@ export function ListMembers() {
             dataIndex: 'action',
             className: '!p-0',
             width: '15%',
-            render: (_, record) => <Button onClick={() => handleDelete(record.id)} icon={<DeleteOutlined />}></Button>,
+            render: (_, record) => (
+                <Button onClick={() => handleDeleteMember(record.id)} icon={<DeleteOutlined />}></Button>
+            ),
             align: 'center',
         },
     ];
@@ -213,7 +223,9 @@ export function ListMembers() {
             dataIndex: 'action',
             className: '!p-0',
             width: '15%',
-            render: (_, record) => <Button onClick={() => handleDelete(record.id)} icon={<DeleteOutlined />}></Button>,
+            render: (_, record) => (
+                <Button onClick={() => handleDeleteMember(record.id)} icon={<DeleteOutlined />}></Button>
+            ),
             align: 'center',
         },
     ];
