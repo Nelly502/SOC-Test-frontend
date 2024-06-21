@@ -1,19 +1,22 @@
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import { ExclamationCircleOutlined, MailOutlined, LeftOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { resetPassword } from '../../requests/auth.request';
 
 export function ForgotPassWord() {
     const [loading, setLoading] = useState(false);
 
     const [form] = Form.useForm();
 
-    const onFinish = async () => {
+    const onFinish = async (values) => {
         try {
             setLoading(true);
             await form.validateFields();
+            const response = await resetPassword(values.email);
+            message.success(response.message); // Hiển thị thông báo thành công
         } catch (e) {
-            //
+            // message.error('Failed to reset password. Please try again.'); 
         } finally {
             setLoading(false);
         }

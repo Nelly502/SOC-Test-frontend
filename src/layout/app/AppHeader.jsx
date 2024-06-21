@@ -1,12 +1,13 @@
 import { useSelector } from 'react-redux';
 import { UserOutlined, DownOutlined, ProfileOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import { Dropdown, Space } from 'antd';
+import { Dropdown, Space, Button } from 'antd';
+import { useNavigate } from 'react-router';
 import logo from '../../assets/images/logo.png';
 
 export function AppHeader() {
     const user = useSelector((state) => state.user);
-
+    const navigate = useNavigate();
     const items = [
         {
             key: '1',
@@ -25,6 +26,8 @@ export function AppHeader() {
             <Link to="/" className="h-full p-1">
                 <img className="h-full w-full object-contain" src={logo} alt="" />
             </Link>
+            {/* <Button onClick={() => navigate('/teacher/classes/create')}>Lớp học</Button>
+            <Button onClick={() => navigate('/teacher/classes/create')}>Môn học</Button> */}
             <div>
                 <Dropdown menu={{ items }} placement="bottom" className="border border-solid rounded p-2">
                     <a onClick={(e) => e.preventDefault()}>
