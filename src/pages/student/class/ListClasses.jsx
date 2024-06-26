@@ -213,7 +213,7 @@ export function ListClasses() {
     return (
         <section className="relative">
             <div className="flex justify-between flex-col md:flex-row items-center flex-wrap mb-4">
-                <h1 className="text-center text-md md:text-4xl text-blue-900">DANH SÁCH LỚP HỌC</h1>
+                <h1 className="text-center text-md md:text-4xl text-blue-900">Danh sách lớp học</h1>
                 <div className="flex space-x-2">
                     <Input.Search
                         size="default"

@@ -8,6 +8,7 @@ import { roles } from '../../constants';
 
 export function ListMembers() {
     const [loading, setLoading] = useState(false);
+
     const [data, setData] = useState({});
     const [query, setQuery] = useState({ take: 10, skip: 0 });
 
@@ -102,23 +103,18 @@ export function ListMembers() {
         {
             title: 'Email',
             dataIndex: 'email',
-            width: '20%',
+            width: '30%',
             key: 'userEmail',
             ellipsis: true,
         },
+
         {
-            title: 'Family Name',
+            title: 'Họ và tên',
             dataIndex: 'user',
-            width: '15%',
-            key: 'familyName',
+            width: '20%',
+            key: 'fullname',
             className: 'nowrap',
-        },
-        {
-            title: 'Given Name',
-            dataIndex: 'givenName',
-            width: '15%',
-            key: 'givenName',
-            className: 'nowrap',
+            render: (_, record) => `${record.familyName} ${record.givenName}`,
         },
         {
             title: 'Mobile',
@@ -184,35 +180,29 @@ export function ListMembers() {
         {
             title: 'Email',
             dataIndex: 'email',
-            width: '20%',
+            width: '30%',
             key: 'userEmail',
             ellipsis: true,
         },
         {
             title: 'Student Number',
             dataIndex: 'studentNumber',
-            width: '10%',
+            width: '15%',
             key: 'studentNumber',
             className: 'nowrap',
         },
         {
-            title: 'Family Name',
-            dataIndex: 'familyName',
-            width: '15%',
-            key: 'familyName',
+            title: 'Họ và tên',
+            dataIndex: 'user',
+            width: '20%',
+            key: 'fullname',
             className: 'nowrap',
-        },
-        {
-            title: 'Given Name',
-            dataIndex: 'givenName',
-            width: '15%',
-            key: 'givenName',
-            className: 'nowrap',
+            render: (_, record) => `${record.familyName} ${record.givenName}`,
         },
         {
             title: 'Mobile',
             dataIndex: 'mobile',
-            width: '15%',
+            width: '10%',
             key: 'mobile',
             className: 'nowrap',
         },
