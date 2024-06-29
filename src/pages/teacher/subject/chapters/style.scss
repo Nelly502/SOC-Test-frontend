@@ -1,0 +1,12 @@
+.chapters-tabs {
+    .ant-tabs-tab-remove {
+        margin-left: auto;
+    }
+    .ant-tabs-tab > div[role='tab'] {
+        width: 120px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        text-align: left;
+    }
+}

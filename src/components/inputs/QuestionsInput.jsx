@@ -1,5 +1,5 @@
 import { Button, Checkbox, Input, Radio, Select } from 'antd';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { BiTrashAlt } from 'react-icons/bi';
 import { IoMdClose } from 'react-icons/io';
@@ -179,5 +179,41 @@ export function QuestionsInput({ value = {}, onChange }) {
                 Thêm
             </Button>
         </div>
+    );
+}
+
+export function QuestionInput({ value = {}, onChange }) {
+    const [question, setQuestion] = useState(
+        value.question ?? {
+            questionId: 0,
+            type: 1,
+            question: '',
+            answers: [],
+        },
+    );
+    const [key, setKey] = useState(
+        value.key ?? {
+            questionId: 0,
+        },
+    );
+
+    useEffect(() => {
+        if (value.question) setQuestion(value.question);
+        if (value.key) setKey(value.key);
+    }, [value]);
+
+    useEffect(() => {
+        onChange({ question, key });
+    }, [question, key]);
+
+    return (
+        <Question
+            question={question}
+            keyAnswer={key}
+            onChange={(question, key) => {
+                setQuestion({ ...question, questionId: 0 });
+                setKey({ ...key, questionId: 0 });
+            }}
+        />
     );
 }

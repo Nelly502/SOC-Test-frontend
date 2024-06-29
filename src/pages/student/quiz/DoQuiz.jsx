@@ -3,8 +3,6 @@ import { useNavigate, useParams } from 'react-router';
 import { Loading } from '../../../components/loading/Loading.jsx';
 import { doQuiz, getQuizById } from '../../../requests/student/student-quizzes.request.js';
 import { Button, Checkbox, Form, Input, Radio, Space } from 'antd';
-import { AES } from 'crypto-js';
-import { useSelector } from 'react-redux';
 
 export function DoQuiz() {
     const [loading, setLoading] = useState(true);
@@ -70,17 +68,12 @@ const QuizForm = ({ quiz, onSubmit }) => {
 
     const { id } = useParams();
     const [form] = Form.useForm();
-    const user = useSelector((state) => state.user);
 
     const handleSubmit = async () => {
         try {
             setLoading(true);
             const formData = await form.validateFields();
             const answers = [];
-            const verify = AES.encrypt(
-                JSON.stringify({ userId: user.id }),
-                import.meta.env.VITE_QUIZ_ENCRYPT_KEY,
-            ).toString();
             for (const questionId in formData) {
                 if (typeof formData[questionId] === 'number') {
                     answers.push({ questionId: Number(questionId), answerId: formData[questionId] });
@@ -92,7 +85,6 @@ const QuizForm = ({ quiz, onSubmit }) => {
             }
             const data = {
                 answers,
-                verify,
             };
             await doQuiz(id, data);
             onSubmit();

@@ -26,6 +26,11 @@ import { CreateQuiz } from './teacher/class/class-details/quizzes/CreateQuizz.js
 import { JoinClass } from './student/class/JoinClass.jsx';
 import { stringify } from 'qs';
 import { ListMembers } from './admin/ListMembers.jsx';
+import { ListSubjectsTeacher } from './teacher/subject/ListSubjectsTeacher.jsx';
+import { ListSubjectsStudent } from './student/subject/ListSubjectsStudent.jsx';
+import { CreateSubject } from './teacher/subject/CreateSubject.jsx';
+import { SubjectDetail } from './teacher/subject/SubjectDetail.jsx';
+import { CreateChapter } from './teacher/subject/chapters/CreateChapter.jsx';
 
 const ProtectedRoute = ({ role, redirectPath, children }) => {
     const user = useSelector((state) => state.user);
@@ -133,6 +138,11 @@ export const AppRoutes = () => {
                 <Route path="/teacher/classes/:id/quizzes/create" element={<CreateQuiz />} />
                 <Route path="/teacher/quizzes/:id" element={<QuizDetails />} />
                 <Route path="/teacher/quizzes/:id/:tab" element={<QuizDetails />} />
+                <Route path="/teacher/subjects/create" element={<CreateSubject />} />
+                <Route path="/teacher/subjects" element={<ListSubjectsTeacher />} />
+                <Route path="/teacher/subjects/:id" element={<SubjectDetail />} />
+                <Route path="/teacher/subjects/:id/:tab" element={<SubjectDetail />} />
+                <Route path="/teacher/chapters/create" element={<CreateChapter />} />
             </Route>
 
             {/* Students routes */}
@@ -150,6 +160,7 @@ export const AppRoutes = () => {
                 <Route path="/student/classes/:id" element={<ClassDetailStudent />} />
                 <Route path="/student/classes/:id/:tab" element={<ClassDetailStudent />} />
                 <Route path="/student/quizzes/:id" element={<DoQuiz />} />
+                <Route path="/student/subjects" element={<ListSubjectsStudent />} />
             </Route>
 
             {/* Admins routes */}

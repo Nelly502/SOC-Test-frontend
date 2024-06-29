@@ -51,7 +51,7 @@ export function Quizzes() {
         try {
             setLoading(true);
             const body = { open };
-            
+
             await updateQuiz(id, body);
             getData();
         } catch (e) {

@@ -18,7 +18,7 @@ export function EditQuiz({ quiz, onUpdate }) {
             setLoading(true);
 
             const { questionsKeys, ...data } = await form.validateFields();
-          
+
             data.questions = questionsKeys.questions;
             data.keys = questionsKeys.keys;
             delete data.classId;
@@ -34,12 +34,12 @@ export function EditQuiz({ quiz, onUpdate }) {
     };
 
     const handleReset = (data) => {
-        const { questions = [], key, ...quiz } = data;
+        const { questions = [], quizKey, ...quiz } = data;
         form.setFieldsValue({
             ...quiz,
             questionsKeys: {
                 questions,
-                keys: key?.keys || [],
+                keys: quizKey?.keys || [],
             },
         });
     };
